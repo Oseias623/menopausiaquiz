@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ===================================
+    // ANALYTICS TRACKER
+    // ===================================
+    // AnalyticsTracker is loaded from analytics-tracker.js
+
+
+
     // --- DATA & CONTENT ---
     const ageFeedback = {
         '35-39': "Aunque estes antes de los 40, tu cuerpo ya puede mostrar primeros signos de cambio hormonal.",
@@ -93,6 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', handleOptionClick);
         });
 
+        // === ANALYTICS ===
+        AnalyticsTracker.setupConsentBanner();
+        AnalyticsTracker.initSession();
+
         // Continue Buttons
         document.querySelectorAll('.continue-btn').forEach(btn => {
             btn.addEventListener('click', handleContinueClick);
@@ -173,8 +184,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Default to 4semanas
                 if (!selectedPlan) selectedPlan = '4semanas';
 
+                // TRACK CHECKOUT CLICK
+                AnalyticsTracker.trackCheckout(selectedPlan, 'offer_section');
+
                 const url = checkoutUrls[selectedPlan] || '#checkout-4semanas';
-                window.location.href = url;
+                // Small delay not strictly needed if trackCheckout is async non-blocking, but guide suggests specific pattern?
+                // Guide says: await AnalyticsTracker.trackCheckout... and wait 100ms.
+
+                // Since function is not async in listener currently, I need to make the listener async?
+                // The guide shows: btn.addEventListener('click', async function () { ...
+                // But here I'm modifying existing code. I'll make it async if possible or just fire and forget. 
+                // Guide snippet at 223 uses setTimeout.
+
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 100);
             });
         });
 
@@ -187,7 +211,44 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleBackClick() {
         if (quizState.history.length === 0) return;
         const prevStepId = quizState.history.pop();
+
+        // TRACK BACK NAVIGATION
+        AnalyticsTracker.trackEvent('back_button_clicked', {
+            step_id: quizState.currentStepId,
+            navigation_direction: 'back',
+            metadata: {
+                from_step: quizState.currentStepId,
+                to_step: prevStepId
+            }
+        });
+
         navigateTo(prevStepId, false); // false = don't save to history (we are popping)
+    }
+
+    // --- EMAIL CAPTURE ---
+    const emailSubmitBtn = document.getElementById('emailSubmitBtn');
+    if (emailSubmitBtn) {
+        emailSubmitBtn.addEventListener('click', async (e) => {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+
+            if (!email || !validateEmail(email)) {
+                alert('Por favor, ingresa un correo válido.');
+                return;
+            }
+
+            // Track Lead
+            // Track Lead
+            await AnalyticsTracker.trackEmailCapture(email);
+
+            // Proceed to next step
+            // (Wait slightly/handled by handleContinueClick logic that follows, 
+            // but we might want to ensure trackEmailCapture finishes first? It is awaited.)
+
+            /* Old Supabase lead capture removed */
+
+            handleContinueClick(e);
+        });
     }
 
     function handleOptionClick(e) {
@@ -203,6 +264,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Save Answer
         if (value) {
             quizState.answers[stepId] = value;
+
+            // Track Answer
+            // Track Answer
+            AnalyticsTracker.trackEvent('answer_selected', {
+                step_id: stepId,
+                step_number: parseInt(parentStep.dataset.step) || 0,
+                answer_value: value,
+                answer_text: btn.textContent.trim(),
+                block_type: block || null
+            });
         }
 
         // Add Score if Block present
@@ -252,6 +323,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = e.currentTarget;
         const nextId = btn.dataset.next;
         const parentStep = btn.closest('.quiz-step');
+
+        // TRACK MULTI-SELECT ANSWERS (para steps com checkboxes)
+        if (parentStep.id === 'step7' || parentStep.id === 'step9' || parentStep.id === 'step_physical') {
+            const checked = parentStep.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedValues = Array.from(checked).map(input => ({
+                value: input.value,
+                text: input.closest('label')?.textContent?.trim() || input.value,
+                block: input.dataset.block || input.dataset.problem || null
+            }));
+
+            AnalyticsTracker.trackEvent('multi_answer_selected', {
+                step_id: parentStep.id,
+                step_number: parseInt(parentStep.dataset.step) || 0,
+                multi_answers: selectedValues
+            });
+        }
 
         // If coming from Step 7 (Symptoms), calculate scores from checkboxes
         if (parentStep.id === 'step7') {
@@ -307,6 +394,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function navigateTo(stepId, saveHistory = true) {
         // Find Current Step
         const current = document.querySelector('.quiz-step.active');
+        const stepNum = current ? parseInt(current.dataset.step) : 0; // Use current step number or next? 
+        // Logic says we track the step we are GOING TO or the one we just Viewed? 
+        // Guide says: LOGO APÓS next.classList.add('active'); ... AnalyticsTracker.trackEvent('step_view', { step_id: stepId...
+
+        // So I will insert it LATER in the function as per guide.
+        // But I need to remove the OLD trackEvent call here first.
+
 
         // Save to history if moving forward (and logic allows)
         if (current && saveHistory) {
@@ -322,8 +416,15 @@ document.addEventListener('DOMContentLoaded', () => {
             next.classList.add('active');
             quizState.currentStepId = stepId;
 
+            // TRACK STEP VIEW AND RESET TIMER
+            AnalyticsTracker.trackEvent('step_view', {
+                step_id: stepId,
+                step_number: parseInt(next.dataset.step) || 0
+            });
+            AnalyticsTracker.resetStepTimer();
+
             // Save progress to localStorage (except special screens)
-            const noSaveScreens = ['loading', 'diagnosis', 'diagnosis_part2', 'offer_screen', 'checkout'];
+            const noSaveScreens = ['loading', 'diagnosis', 'offer_screen', 'checkout'];
             if (!noSaveScreens.includes(stepId)) {
                 saveProgress();
             }
@@ -690,6 +791,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const marker = document.querySelector('.diag-bar-marker');
             if (marker) marker.style.left = winner === 'misto' ? '75%' : '85%';
         }, 800);
+
+        // TRACK QUIZ COMPLETION (Replacing logic from previous chunk comment - doing it here is better)
+        AnalyticsTracker.trackEvent('quiz_completed', {
+            step_id: 'diagnosis',
+            metadata: {
+                score_circadiano: scores.circadiano,
+                score_inflamacion: scores.inflamacion,
+                score_estructura: scores.estructura,
+                dominant_profile: winner
+            }
+        });
+
+        // UPDATE SESSION WITH FINAL SCORES
+        AnalyticsTracker.updateSessionStatus('completed', {
+            completed_at: new Date().toISOString(),
+            score_circadiano: scores.circadiano,
+            score_inflamacion: scores.inflamacion,
+            score_estructura: scores.estructura,
+            dominant_profile: winner,
+            time_spent_seconds: Math.floor((Date.now() - AnalyticsTracker.sessionStartTime) / 1000)
+        });
     }
 
     function animateComfortLoader() {

@@ -7,6 +7,13 @@
     <title>Descubre tu Etapa | Menopausia con Claridad</title>
     <meta name="description"
         content="Descubre qué está pasando en tu cuerpo y cómo miles de mujeres están recuperando su energía y bienestar.">
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Analytics Tracker -->
+    <script src="analytics-tracker.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -46,6 +53,13 @@
 
         <!-- ETAPA 0: INTRO / GANCHO -->
         <div class="quiz-step active" id="intro" data-step="0">
+            <!-- CONSENT BANNER -->
+            <div id="consent-banner" class="consent-banner">
+                <p>🍪 Usamos cookies para melhorar sua experiência. Ao continuar, você concorda com nossa coleta de
+                    dados anônimos para melhorar o quiz.</p>
+                <button id="accept-consent">Aceitar e continuar</button>
+            </div>
+
             <div class="intro-content">
                 <h1 class="intro-title">¿Por qué después de los 40 parece que tu cuerpo ya no te pertenece?</h1>
                 <p class="intro-subtitle">Descubre el desajuste invisible que está bloqueando tu energía y metabolismo
@@ -540,10 +554,6 @@
                         style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 </div>
 
-                <button class="continue-btn" data-next="step9" style="margin-bottom: 20px;">
-                    <p>Entiendo, quiero corregirlo</p>
-                </button>
-
                 <div class="graph-text-block"
                     style="text-align: left; background: #fff5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-bottom: 20px;">
                     <p style="font-weight: 500; margin-bottom: 10px;">Después de la caída del estrógeno, el cuerpo deja
@@ -558,6 +568,10 @@
                     <p style="font-weight: 700; color: #d32f2f;">La solución no es comer menos. Es corregir el bloqueo
                         hormonal primero.</p>
                 </div>
+
+                <button class="continue-btn" data-next="step9">
+                    <p>Entiendo, quiero corregirlo</p>
+                </button>
             </div>
         </div>
 
@@ -733,16 +747,6 @@
                     </div>
                 </div>
 
-                <button class="continue-btn" data-next="diagnosis_part2" style="margin-top: 20px;">
-                    <p>Continuar</p>
-                </button>
-            </div>
-        </div>
-
-        <!-- ETAPA 11.5: DIAGNÓSTICO PARTE 2 -->
-        <div class="quiz-step" id="diagnosis_part2" data-step="result">
-            <div class="diag-page">
-
                 <!-- Las 3 Fallas Metabólicas (Consolidated from Version 2) -->
                 <div class="fallas-section"
                     style="margin: 20px 0; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
@@ -885,8 +889,8 @@
                 <h1 class="transition-title">Recibe tu protocolo personalizado ahora</h1>
                 <p class="transition-subtitle">Te enviamos tu rutina, recetas y diagnóstico hormonal por email.</p>
 
-                <div class="email-form-container">
-                    <input type="email" id="userEmail" class="email-input" placeholder="Ingresa tu correo electrónico"
+                <div class="email-form">
+                    <input type="email" id="email" class="email-input" placeholder="Ingresa tu correo electrónico"
                         required>
                     <button class="continue-btn pulse-btn" id="emailSubmitBtn" data-next="transition_result">
                         <p>Recibir mi protocolo ahora</p>
@@ -1380,8 +1384,8 @@
                 <p class="testimonials-subtext">Resultados reales de mujeres que corrigieron su metabolismo después de
                     los 40</p>
 
-                <!-- Wrapper para Carrossel Mobile -->
-                <div class="testimonials-slider">
+                <!-- Carousel Container -->
+                <div class="testimonials-carousel">
                     <!-- Depoimento 1: Ritmo Circadiano -->
                     <div class="testimonial-card">
                         <div class="testimonial-image">

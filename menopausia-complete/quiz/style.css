@@ -1338,7 +1338,6 @@ img {
 @media (max-width: 768px) {
     .quiz-container {
         padding: calc(62px + 1rem) var(--spacing-sm) var(--spacing-sm);
-        align-items: flex-start;
     }
 
     .step-content,
@@ -1405,8 +1404,7 @@ img {
 
 @media (max-width: 480px) {
     .quiz-container {
-        padding: calc(56px + 15px) 0.75rem 2rem;
-        align-items: flex-start;
+        padding: calc(62px + 0.75rem) 0.75rem 0.75rem;
     }
 
     .step-content,
@@ -1941,6 +1939,7 @@ img {
 }
 
 .email-input {
+    width: 100%;
     padding: var(--spacing-md) var(--spacing-lg);
     border: 2px solid var(--neutral-light);
     border-radius: 12px;
@@ -2019,18 +2018,50 @@ img {
     animation: fadeIn 0.6s 0.4s forwards;
 }
 
+.testimonials-carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--spacing-md);
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--spacing-md);
+    margin: 0 calc(var(--spacing-md) * -1);
+    /* Negative margin for full bleed on mobile */
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Hide scrollbar */
+}
+
+.testimonials-carousel::-webkit-scrollbar {
+    display: none;
+}
+
 .testimonial-card {
     background: white;
     border: 2px solid var(--neutral-light);
     border-radius: 20px;
     padding: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+
+    /* Carousel Item styles */
+    min-width: 85%;
+    /* Mobile default */
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
     opacity: 0;
     animation: slideInUp 0.6s forwards;
     transition: var(--transition-smooth);
+}
+
+@media (min-width: 768px) {
+    .testimonial-card {
+        min-width: 400px;
+        flex: 0 0 400px;
+    }
 }
 
 .testimonial-card:nth-child(3) {
@@ -3959,85 +3990,62 @@ img[src*="hormonal_vs_traditional_graph"] {
     }
 }
 
-/* ============================================
-   MOBILE TESTIMONIALS CAROUSEL
-   ============================================ */
+/* ==================== */
+/* CONSENT BANNER STYLES */
+/* ==================== */
+
+.consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(20, 20, 20, 0.95);
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    font-family: inherit;
+}
+
+.consent-banner p {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.consent-banner button {
+    margin-top: 10px;
+    padding: 12px 40px;
+    background: #FF6B9D;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.consent-banner button:hover {
+    background: #ff5a8e;
+}
+
+.consent-banner button:active {
+    transform: scale(0.98);
+}
+
 @media (max-width: 768px) {
-    .testimonials-slider {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 16px;
-        padding-bottom: 24px;
-        margin: 0 -10px;
-        padding-left: 10px;
-        padding-right: 10px;
+    .consent-banner {
+        padding: 15px;
     }
 
-    .testimonial-card {
-        min-width: 85%;
-        scroll-snap-align: center;
-        margin-bottom: 0;
-        flex-shrink: 0;
-        height: auto;
-        /* Match success-card-v2 style */
-        background: white;
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        border: none;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
+    .consent-banner p {
+        font-size: 13px;
     }
 
-    .testimonial-image {
-        width: 100%;
-        margin: 0;
-        border-radius: 0;
-        aspect-ratio: 4/3;
-        overflow: hidden;
-    }
-
-    .testimonial-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 0;
-    }
-
-    .testimonial-content {
-        padding: 16px;
-        gap: 12px;
-    }
-
-    .testimonial-quote {
-        font-size: 0.95rem;
-        padding-left: 0;
-        text-align: center;
-        margin: 0;
-        line-height: 1.5;
-    }
-
-    .testimonial-quote::before {
-        display: none;
-        /* Remove large quote mark for this clean style */
-    }
-
-    .testimonial-author {
-        border-top: none;
-        padding-top: 0;
-        justify-content: space-between;
-        margin-top: auto;
-    }
-
-    /* Hide scrollbar */
-    .testimonials-slider::-webkit-scrollbar {
-        display: none;
-    }
-
-    .testimonials-slider {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+    .consent-banner button {
+        padding: 10px 30px;
+        font-size: 13px;
     }
 }
