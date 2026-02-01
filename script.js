@@ -1,4 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- SUPABASE CONFIG ---
+    const supabaseUrl = 'https://pmscpydblddkwbgkzdmw.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtc2NweWRibGRka3diZ2t6ZG13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxMTg1MTEsImV4cCI6MjA4MjY5NDUxMX0.O197knt-1fDoi-5zSHVdGbz0StIJrfaTRKba5hezWX0';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    // --- SESSION MANAGEMENT ---
+    let sessionId = localStorage.getItem('quiz_session_id');
+    if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        localStorage.setItem('quiz_session_id', sessionId);
+    }
+
+    // --- TRACKING FUNCTION ---
+    async function trackEvent(eventType, stepId, data = {}) {
+        try {
+            const { error } = await supabase
+                .from('quiz_events')
+                .insert({
+                    session_id: sessionId,
+                    event_type: eventType,
+                    step_id: stepId,
+                    data: data
+                });
+
+            if (error) console.error('Error tracking event:', error);
+        } catch (err) {
+            console.error('Tracking exception:', err);
+        }
+    }
+
     // --- DATA & CONTENT ---
     const ageFeedback = {
         '35-39': "Aunque estes antes de los 40, tu cuerpo ya puede mostrar primeros signos de cambio hormonal.",
@@ -190,6 +220,35 @@ document.addEventListener('DOMContentLoaded', () => {
         navigateTo(prevStepId, false); // false = don't save to history (we are popping)
     }
 
+    // --- EMAIL CAPTURE ---
+    const emailSubmitBtn = document.getElementById('emailSubmitBtn');
+    if (emailSubmitBtn) {
+        emailSubmitBtn.addEventListener('click', async (e) => {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+
+            if (!email || !validateEmail(email)) {
+                alert('Por favor, ingresa un correo válido.');
+                return;
+            }
+
+            // Track Lead
+            try {
+                await supabase.from('quiz_leads').insert({
+                    email: email,
+                    quiz_data: quizState.answers,
+                    source: 'quiz_flow'
+                });
+
+                trackEvent('lead_captured', 'email_step', { email: email }); // Consider privacy if tracking emails in events
+            } catch (err) {
+                console.error('Error saving lead:', err);
+            }
+
+            handleContinueClick(e);
+        });
+    }
+
     function handleOptionClick(e) {
         const btn = e.currentTarget;
         const nextId = btn.dataset.next;
@@ -203,6 +262,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Save Answer
         if (value) {
             quizState.answers[stepId] = value;
+
+            // Track Answer
+            trackEvent('answer_selected', stepId, {
+                answer: value,
+                category: block || 'no_category',
+            });
         }
 
         // Add Score if Block present
@@ -305,6 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SUPPORT FUNCTIONS ---
 
     function navigateTo(stepId, saveHistory = true) {
+        // Track View
+        trackEvent('step_view', stepId, {
+            previous_step: quizState.currentStepId
+        });
+
         // Find Current Step
         const current = document.querySelector('.quiz-step.active');
 
