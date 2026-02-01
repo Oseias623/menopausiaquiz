@@ -1,0 +1,113 @@
+/* ============================================
+   MENOPAUSIA CON CLARIDAD
+   Brand Color System - Verde & Dourado
+   ============================================ */
+
+:root {
+    /* ========== PRIMARY - VERDE ========== */
+    /* Verde principal - sofisticado, profundo */
+    --primary-green: #2D5A47;
+    --primary-green-light: #3D7A5F;
+    --primary-green-dark: #1E3D30;
+    --primary-green-muted: #4A8068;
+
+    /* Verde suave - para fundos e áreas grandes */
+    --green-soft: #E8F0EC;
+    --green-softer: #F2F7F4;
+    --green-pale: #F8FAF9;
+
+    /* ========== SECONDARY - DOURADO ========== */
+    /* Dourado principal - elegante, premium */
+    --accent-gold: #C9A55C;
+    --accent-gold-light: #D4B876;
+    --accent-gold-dark: #A8864A;
+    --accent-gold-muted: #DECCA8;
+
+    /* Dourado suave - para detalhes sutis */
+    --gold-soft: #FDF8EE;
+    --gold-softer: #FEFCF7;
+
+    /* ========== NEUTRALS ========== */
+    --neutral-900: #1A1F1C;
+    --neutral-800: #2D3430;
+    --neutral-700: #3D4642;
+    --neutral-600: #5A635E;
+    --neutral-500: #7A837E;
+    --neutral-400: #9CA5A0;
+    --neutral-300: #C4CBC7;
+    --neutral-200: #E2E6E4;
+    --neutral-100: #F0F2F1;
+    --neutral-50: #F8F9F8;
+
+    /* ========== SEMANTIC ========== */
+    --success: #4A8068;
+    --warning: #C9A55C;
+    --error: #B85450;
+    --info: #5A8A9A;
+
+    /* ========== BACKGROUNDS ========== */
+    --bg-primary: #FDFDFB;
+    --bg-secondary: var(--green-softer);
+    --bg-accent: var(--gold-soft);
+    --bg-dark: var(--primary-green-dark);
+
+    /* ========== TEXT ========== */
+    --text-primary: var(--neutral-900);
+    --text-secondary: var(--neutral-600);
+    --text-muted: var(--neutral-500);
+    --text-inverse: #FFFFFF;
+    --text-accent: var(--primary-green);
+
+    /* ========== BORDERS ========== */
+    --border-light: var(--neutral-200);
+    --border-medium: var(--neutral-300);
+    --border-accent: var(--accent-gold-muted);
+
+    /* ========== SHADOWS ========== */
+    --shadow-sm: 0 1px 2px rgba(45, 90, 71, 0.05);
+    --shadow-md: 0 4px 12px rgba(45, 90, 71, 0.08);
+    --shadow-lg: 0 8px 24px rgba(45, 90, 71, 0.12);
+    --shadow-xl: 0 16px 48px rgba(45, 90, 71, 0.16);
+    --shadow-gold: 0 4px 16px rgba(201, 165, 92, 0.2);
+
+    /* ========== GRADIENTS ========== */
+    --gradient-primary: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-light) 100%);
+    --gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+    --gradient-soft: linear-gradient(180deg, var(--green-softer) 0%, var(--bg-primary) 100%);
+    --gradient-luxury: linear-gradient(135deg, var(--primary-green-dark) 0%, var(--primary-green) 50%, var(--accent-gold-dark) 100%);
+
+    /* ========== TYPOGRAPHY ========== */
+    --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-body: 'Outfit', 'DM Sans', -apple-system, sans-serif;
+
+    /* ========== SPACING ========== */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2.5rem;
+    --spacing-xl: 4rem;
+    --spacing-2xl: 6rem;
+
+    /* ========== RADIUS ========== */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* ========== TRANSITIONS ========== */
+    --transition-fast: 150ms ease;
+    --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ========== DARK MODE (opcional) ========== */
+@media (prefers-color-scheme: dark) {
+    :root.auto-dark {
+        --bg-primary: var(--neutral-900);
+        --bg-secondary: var(--neutral-800);
+        --text-primary: var(--neutral-100);
+        --text-secondary: var(--neutral-400);
+        --border-light: var(--neutral-700);
+    }
+}

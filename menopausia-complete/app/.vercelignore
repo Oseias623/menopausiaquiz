@@ -1,0 +1,14 @@
+
+# Ignore large source folders that are locally present but not needed for build
+Principal/
+BÔNUS/
+audios-to-upload/
+pdfs-to-rename/
+pdfs-to-upload/
+arsenal_content/
+
+# Ignore git
+.git/
+
+# Ignore dependencies (Vercel installs them)
+node_modules/

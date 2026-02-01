@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menopausia Con Claridad</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff7f2', // Verdinho clarinho mais fresco
+              100: '#d8e8de', // Verde água suave
+              200: '#c5d8cc',
+              300: '#9dbba8',
+              400: '#759a82',
+              500: '#557c64',
+              600: '#41614e',
+              700: '#354d3f',
+              800: '#2d3f35',
+              900: '#26342c',
+              950: '#15221b', // Verde ultra escuro (quase preto) para fundo Dark Mode
+            },
+            dark: {
+              900: '#09090b',
+              800: '#18181b',
+              700: '#27272a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #15221b;
+      color: #eff7f2;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #e3ebe5;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #9dbba8;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #759a82;
+    }
+
+    /* Hide scrollbar utility */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

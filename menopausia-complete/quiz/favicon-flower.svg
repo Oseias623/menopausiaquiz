@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="goldPetal" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#B8944D"/>
+      <stop offset="50%" style="stop-color:#C9A55C"/>
+      <stop offset="100%" style="stop-color:#D4AF61"/>
+    </linearGradient>
+    <linearGradient id="greenLeaf" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a3d2e"/>
+      <stop offset="100%" style="stop-color:#2D5A47"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Caule -->
+  <path d="M 32 38 Q 28 45, 22 55 Q 18 62, 12 64"
+        fill="none"
+        stroke="#2D5A47"
+        stroke-width="2"
+        stroke-linecap="round"/>
+
+  <!-- Folhas verdes -->
+  <ellipse cx="18" cy="48" rx="6" ry="12"
+           fill="url(#greenLeaf)"
+           transform="rotate(-30 18 48)"/>
+  <ellipse cx="26" cy="54" rx="5" ry="10"
+           fill="url(#greenLeaf)"
+           transform="rotate(-45 26 54)"/>
+  <ellipse cx="14" cy="58" rx="4" ry="8"
+           fill="url(#greenLeaf)"
+           transform="rotate(-60 14 58)"/>
+
+  <!-- Pétalas douradas (flor de lótus) -->
+  <!-- Pétala central -->
+  <ellipse cx="32" cy="18" rx="4" ry="12"
+           fill="url(#goldPetal)"/>
+
+  <!-- Pétalas laterais internas -->
+  <ellipse cx="24" cy="22" rx="4" ry="10"
+           fill="url(#goldPetal)"
+           transform="rotate(-25 24 22)"/>
+  <ellipse cx="40" cy="22" rx="4" ry="10"
+           fill="url(#goldPetal)"
+           transform="rotate(25 40 22)"/>
+
+  <!-- Pétalas laterais externas -->
+  <ellipse cx="18" cy="26" rx="3" ry="8"
+           fill="url(#goldPetal)"
+           transform="rotate(-45 18 26)"/>
+  <ellipse cx="46" cy="26" rx="3" ry="8"
+           fill="url(#goldPetal)"
+           transform="rotate(45 46 26)"/>
+
+  <!-- Centro da flor -->
+  <circle cx="32" cy="30" r="4" fill="#C9A55C"/>
+</svg>

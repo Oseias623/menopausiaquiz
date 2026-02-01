@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubre tu Etapa | Menopausia con Claridad</title>
+    <meta name="description"
+        content="Descubre qué está pasando en tu cuerpo y cómo miles de mujeres están recuperando su energía y bienestar.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+
+<body>
+    <!-- Fixed Header -->
+    <header class="quiz-header">
+        <button class="back-btn" id="backBtn" aria-label="Voltar">
+            <span class="back-arrow">←</span>
+        </button>
+        <div class="header-logo" id="headerLogo">
+            <img src="logo.svg" alt="Menopausia con Claridad" class="header-logo-img">
+        </div>
+        <!-- Integrated Offer Elements (Hidden by default) -->
+        <div class="header-offer-timer" id="headerOfferTimer" style="display: none;">
+            80% de descuento reservado por: <span id="headerTimer">14:59</span>
+        </div>
+        <button class="header-cta-btn" id="headerCtaBtn" style="display: none;">
+            OBTENER MI PLAN
+        </button>
+        <div class="step-counter" id="stepCounter"></div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Quiz Container -->
+    <div class="quiz-container" id="quizContainer">
+
+        <!-- ETAPA 0: INTRO / GANCHO -->
+        <div class="quiz-step active" id="intro" data-step="0">
+            <div class="intro-content">
+                <h1 class="intro-title">¿Por qué después de los 40 parece que tu cuerpo ya no te pertenece?</h1>
+                <p class="intro-subtitle">Descubre el desajuste invisible que está bloqueando tu energía y metabolismo
+                    (y cómo miles de mujeres están recuperando su equilibrio).</p>
+                <div class="intro-image-wrapper">
+                    <img src="https://media.istockphoto.com/id/1455246873/photo/mature-woman-stretching.jpg?s=612x612&w=0&k=20&c=XvUqZgC9X2z1i6Fm5v5x5x5x5x5x5x5x5x5x5x5x5x5"
+                        alt="Mujer 40+" class="intro-image" style="display:none;">
+                </div>
+                <button class="continue-btn start-btn" data-next="step_initial_problem">QUIERO DESCUBRIR MI
+                    DIAGNÓSTICO</button>
+                <p class="intro-micro-copy">⏱️ Test rápido · Sin registros médicos · Resultados personalizados</p>
+            </div>
+        </div>
+
+        <!-- ETAPA 1: PROBLEMA PRINCIPAL (NUEVA) -->
+        <div class="quiz-step" id="step_initial_problem" data-step="1">
+            <div class="step-content">
+                <h1 class="question-title">¿Cuál de estos problemas notas con más frecuencia hoy?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="grasa" data-next="step2">
+                        <div class="option-content"><span class="option-emoji">⚖️</span><span class="option-text">Grasa
+                                abdominal que no baja con nada</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="cansancio" data-next="step2">
+                        <div class="option-content"><span class="option-emoji">😫</span><span
+                                class="option-text">Cansancio extremo incluso durmiendo bien</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="ansiedad" data-next="step2">
+                        <div class="option-content"><span class="option-emoji">😰</span><span
+                                class="option-text">Ansiedad, irritabilidad o falta de enfoque</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="sofocos" data-next="step2">
+                        <div class="option-content"><span class="option-emoji">🌡️</span><span
+                                class="option-text">Calores, sofocos o sudores nocturnos</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="dolores" data-next="step2">
+                        <div class="option-content"><span class="option-emoji">🦴</span><span
+                                class="option-text">Dolores articulares o falta de fuerza</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- step1 (Age) will be moved later in the file -->
+
+
+        <!-- validation1 moved -->
+
+        <!-- ETAPA 2: FORMA DE DESPERTAR -->
+        <div class="quiz-step" id="step2" data-step="2">
+            <div class="step-content">
+                <h1 class="question-title">¿Cómo despiertas normalmente por la mañana?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="cansada" data-block="circadiano"
+                        data-next="validation_morning">
+                        <div class="option-content"><span class="option-emoji">😫</span><span
+                                class="option-text">Cansada, incluso después de dormir</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="sueño" data-block="circadiano"
+                        data-next="validation_morning">
+                        <div class="option-content"><span class="option-emoji">😴</span><span class="option-text">Con
+                                sueño y poca energía</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="agota" data-next="validation_morning">
+                        <div class="option-content"><span class="option-emoji">⚡</span><span class="option-text">Bien al
+                                despertar, pero me agoto rápido</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="energia" data-next="step3">
+                        <div class="option-content"><span class="option-emoji">☀️</span><span class="option-text">Con
+                                energía y buen ánimo</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION MORNING -->
+        <div class="quiz-step" id="validation_morning" data-step="2">
+            <div class="validation-content">
+                <div class="validation-icon">🧠</div>
+                <p class="validation-text">Dormir mal o despertar cansada es uno de los primeros signos de desajuste
+                    hormonal después de los 40.</p>
+                <button class="continue-btn" data-next="step3">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- VALIDATION 2 -->
+        <div class="quiz-step" id="validation2" data-step="2">
+            <div class="validation-content">
+
+                <div class="validation-icon">⚠️</div>
+                <p class="validation-text">Este es uno de los primeros signos de desajuste del ritmo circadiano — una
+                    causa directa de grasa abdominal y sofocos en la menopausia.</p>
+                <button class="continue-btn" data-next="step3">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 3: HORAS DE SUEÑO -->
+        <div class="quiz-step" id="step3" data-step="3">
+            <div class="step-content">
+
+                <h1 class="question-title">¿Cuántas horas duermes normalmente por noche?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="menos5" data-block="circadiano" data-next="step4">
+                        <div class="option-content"><span class="option-emoji">🌑</span><span class="option-text">Menos
+                                de 5 horas</span></div> <svg class="option-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                            width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <mask id="mask0_10490_2063" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                                <rect width="20" height="20" fill="#D9D9D9" />
+                            </mask>
+                            <g mask="url(#mask0_10490_2063)">
+                                <path
+                                    d="M11.543 10.0017L6.79066 5.24941C6.66532 5.12407 6.60429 4.97487 6.60755 4.80179C6.61081 4.62872 6.6751 4.47946 6.80044 4.35402C6.92578 4.22868 7.07498 4.16602 7.24806 4.16602C7.42113 4.16602 7.57039 4.22868 7.69583 4.35402L12.5258 9.19372C12.6397 9.30781 12.7242 9.43561 12.7792 9.57714C12.8343 9.71867 12.8619 9.8602 12.8619 10.0017C12.8619 10.1433 12.8343 10.2848 12.7792 10.4263C12.7242 10.5678 12.6397 10.6957 12.5258 10.8097L7.68605 15.6494C7.56071 15.7748 7.41314 15.8358 7.24332 15.8326C7.0734 15.8293 6.92578 15.765 6.80044 15.6397C6.6751 15.5143 6.61244 15.3651 6.61244 15.192C6.61244 15.019 6.6751 14.8697 6.80044 14.7443L11.543 10.0017Z"
+                                    fill="currentColor" />
+                            </g>
+                        </svg>
+                    </button>
+                    <button class="option-card-large" data-value="5-6" data-block="circadiano" data-next="step4">
+                        <div class="option-content"><span class="option-emoji">🌘</span><span class="option-text">5 – 6
+                                horas</span></div> <svg class="option-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                            width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <mask id="mask0_10490_2063" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                                <rect width="20" height="20" fill="#D9D9D9" />
+                            </mask>
+                            <g mask="url(#mask0_10490_2063)">
+                                <path
+                                    d="M11.543 10.0017L6.79066 5.24941C6.66532 5.12407 6.60429 4.97487 6.60755 4.80179C6.61081 4.62872 6.6751 4.47946 6.80044 4.35402C6.92578 4.22868 7.07498 4.16602 7.24806 4.16602C7.42113 4.16602 7.57039 4.22868 7.69583 4.35402L12.5258 9.19372C12.6397 9.30781 12.7242 9.43561 12.7792 9.57714C12.8343 9.71867 12.8619 9.8602 12.8619 10.0017C12.8619 10.1433 12.8343 10.2848 12.7792 10.4263C12.7242 10.5678 12.6397 10.6957 12.5258 10.8097L7.68605 15.6494C7.56071 15.7748 7.41314 15.8358 7.24332 15.8326C7.0734 15.8293 6.92578 15.765 6.80044 15.6397C6.6751 15.5143 6.61244 15.3651 6.61244 15.192C6.61244 15.019 6.6751 14.8697 6.80044 14.7443L11.543 10.0017Z"
+                                    fill="currentColor" />
+                            </g>
+                        </svg>
+                    </button>
+                    <button class="option-card-large" data-value="7-8" data-next="step4">
+                        <div class="option-content"><span class="option-emoji">🌕</span><span class="option-text">7 – 8
+                                horas</span></div> <svg class="option-icon-svg" xmlns="http://www.w3.org/2000/svg"
+                            width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <mask id="mask0_10490_2063" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                                <rect width="20" height="20" fill="#D9D9D9" />
+                            </mask>
+                            <g mask="url(#mask0_10490_2063)">
+                                <path
+                                    d="M11.543 10.0017L6.79066 5.24941C6.66532 5.12407 6.60429 4.97487 6.60755 4.80179C6.61081 4.62872 6.6751 4.47946 6.80044 4.35402C6.92578 4.22868 7.07498 4.16602 7.24806 4.16602C7.42113 4.16602 7.57039 4.22868 7.69583 4.35402L12.5258 9.19372C12.6397 9.30781 12.7242 9.43561 12.7792 9.57714C12.8343 9.71867 12.8619 9.8602 12.8619 10.0017C12.8619 10.1433 12.8343 10.2848 12.7792 10.4263C12.7242 10.5678 12.6397 10.6957 12.5258 10.8097L7.68605 15.6494C7.56071 15.7748 7.41314 15.8358 7.24332 15.8326C7.0734 15.8293 6.92578 15.765 6.80044 15.6397C6.6751 15.5143 6.61244 15.3651 6.61244 15.192C6.61244 15.019 6.6751 14.8697 6.80044 14.7443L11.543 10.0017Z"
+                                    fill="currentColor" />
+                            </g>
+                        </svg>
+                    </button>
+                    <button class="option-card-large" data-value="mas8" data-block="circadiano" data-next="step4">
+                        <div class="option-content"><span class="option-emoji">🛌</span><span class="option-text">Más de
+                                8 horas (pero sigo cansada)</span></div> <svg class="option-icon-svg"
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <mask id="mask0_10490_2063" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                                <rect width="20" height="20" fill="#D9D9D9" />
+                            </mask>
+                            <g mask="url(#mask0_10490_2063)">
+                                <path
+                                    d="M11.543 10.0017L6.79066 5.24941C6.66532 5.12407 6.60429 4.97487 6.60755 4.80179C6.61081 4.62872 6.6751 4.47946 6.80044 4.35402C6.92578 4.22868 7.07498 4.16602 7.24806 4.16602C7.42113 4.16602 7.57039 4.22868 7.69583 4.35402L12.5258 9.19372C12.6397 9.30781 12.7242 9.43561 12.7792 9.57714C12.8343 9.71867 12.8619 9.8602 12.8619 10.0017C12.8619 10.1433 12.8343 10.2848 12.7792 10.4263C12.7242 10.5678 12.6397 10.6957 12.5258 10.8097L7.68605 15.6494C7.56071 15.7748 7.41314 15.8358 7.24332 15.8326C7.0734 15.8293 6.92578 15.765 6.80044 15.6397C6.6751 15.5143 6.61244 15.3651 6.61244 15.192C6.61244 15.019 6.6751 14.8697 6.80044 14.7443L11.543 10.0017Z"
+                                    fill="currentColor" />
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION 3 -->
+        <div class="quiz-step" id="validation3" data-step="3">
+            <div class="validation-content">
+
+                <div class="validation-icon">📉</div>
+                <p class="validation-text" id="sleepValidationText">Cargando...</p>
+                <button class="continue-btn" data-next="step4">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 4: DISTRIBUCIÓN DE GRASA -->
+        <div class="quiz-step" id="step4" data-step="4">
+            <div class="step-content">
+                <h1 class="question-title">¿Has notado cambios en la forma en que tu peso se distribuye?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="estable" data-next="step5">
+                        <div class="option-content"><span class="option-emoji">✨</span><span class="option-text">No, mi
+                                peso es estable</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="todo" data-next="step5">
+                        <div class="option-content"><span class="option-emoji">⚖️</span><span class="option-text">Subí
+                                peso en todo el cuerpo</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="barriga" data-block="inflamacion"
+                        data-next="validation4">
+                        <div class="option-content"><span class="option-emoji">🎈</span><span
+                                class="option-text">Principalmente en la barriga / cintura</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION 4 -->
+        <div class="quiz-step" id="validation4" data-step="4">
+            <div class="validation-content">
+                <div class="validation-icon">🔥</div>
+                <p class="validation-text">Este es el signo clásico de resistencia a la insulina después de la caída del
+                    estrógeno. No es grasa normal — es inflamación metabólica.</p>
+                <button class="continue-btn" data-next="step5">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 5: RELACIÓN CON LA COMIDA -->
+        <div class="quiz-step" id="step5" data-step="5">
+            <div class="step-content">
+                <h1 class="question-title">¿Cuál frase describe mejor tu relación con la comida hoy?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="todo" data-next="step6">
+                        <div class="option-content"><span class="option-emoji">🍽️</span><span class="option-text">Como
+                                de todo sin preocuparme</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="limpio" data-block="inflamacion"
+                        data-next="validation5">
+                        <div class="option-content"><span class="option-emoji">🥗</span><span class="option-text">Ya
+                                intenté comer ‘limpio’ pero el peso vuelve rápido</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="ansiedad" data-block="inflamacion"
+                        data-next="validation5">
+                        <div class="option-content"><span class="option-emoji">🍫</span><span class="option-text">Tengo
+                                mucha ansiedad por dulces por la tarde</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION 5 -->
+        <div class="quiz-step" id="validation5" data-step="5">
+            <div class="validation-content">
+                <div class="validation-icon">💡</div>
+                <p class="validation-text">En la menopausia, comer menos ya no funciona. El problema no es la cantidad —
+                    es cómo combinas los alimentos.</p>
+                <button class="continue-btn" data-next="step6">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 6: HUMOR Y NIEBLA MENTAL -->
+        <div class="quiz-step" id="step6" data-step="6">
+            <div class="step-content">
+                <h1 class="question-title">¿Además del cuerpo, has notado cambios en tu estado emocional?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="estable" data-next="step_age">
+                        <div class="option-content"><span class="option-emoji">😌</span><span class="option-text">Estoy
+                                estable</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="irritabilidad" data-block="inflamacion"
+                        data-next="validation6">
+                        <div class="option-content"><span class="option-emoji">😠</span><span
+                                class="option-text">Irritabilidad frecuente</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="ansiedad" data-block="inflamacion"
+                        data-next="validation6">
+                        <div class="option-content"><span class="option-emoji">😵‍💫</span><span
+                                class="option-text">Ansiedad o niebla mental</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION 6 -->
+        <div class="quiz-step" id="validation6" data-step="6">
+            <div class="validation-content">
+                <div class="validation-icon">🧠</div>
+                <p class="validation-text">Estos síntomas están directamente ligados a inflamación intestinal y cambios
+                    hormonales en la menopausia.</p>
+                <button class="continue-btn" data-next="step_age">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- ETAPA 7: ETAPA DE VIDA (REPOSICIONADA) -->
+        <div class="quiz-step" id="step_age" data-step="7">
+            <div class="step-content">
+                <h1 class="question-title">¿En qué etapa de tu vida te encuentras hoy?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="35-39" data-next="validation_age">
+                        <div class="option-content">
+                            <span class="option-text">35 – 39 años</span>
+                            <span class="option-subtext">"Siento cambios que no entiendo"</span>
+                        </div>
+                    </button>
+                    <button class="option-card-large" data-value="40-44" data-next="validation_age">
+                        <div class="option-content">
+                            <span class="option-text">40 – 44 años</span>
+                            <span class="option-subtext">"Hago lo mismo de siempre, pero ya no funciona"</span>
+                        </div>
+                    </button>
+                    <button class="option-card-large" data-value="45-49" data-next="validation_age">
+                        <div class="option-content">
+                            <span class="option-text">45 – 49 años</span>
+                            <span class="option-subtext">"Mis emociones y mi energía son una montaña rusa"</span>
+                        </div>
+                    </button>
+                    <button class="option-card-large" data-value="50-54" data-next="validation_age">
+                        <div class="option-content">
+                            <span class="option-text">50 – 54 años</span>
+                            <span class="option-subtext">"Siento que he perdido el control de mi cuerpo"</span>
+                        </div>
+                    </button>
+                    <button class="option-card-large" data-value="55+" data-next="validation_age">
+                        <div class="option-content">
+                            <span class="option-text">55 años o más</span>
+                            <span class="option-subtext">"Busco recuperar mi vitalidad y bienestar"</span>
+                        </div>
+                    </button>
+                    <p class="question-micro-copy">🛡️ <strong>Tu privacidad es nuestra prioridad.</strong> Usamos esta
+                        información solo para personalizar tu diagnóstico y no compartimos tus datos con nadie.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION AGE -->
+        <div class="quiz-step" id="validation_age" data-step="7">
+            <div class="validation-content">
+                <p class="validation-text" id="ageValidationText">Cargando...</p>
+                <div class="validation-image-container">
+                    <img id="ageValidationImage" src="" alt="Women Group" class="validation-image">
+                </div>
+                <!-- <div class="validation-icon">📊</div> -->
+                <button class="continue-btn" data-next="step7">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 8: SÍNTOMAS PRINCIPALES (MULTI SELECT) -->
+        <div class="quiz-step" id="step7" data-step="8">
+            <div class="step-content">
+
+                <h1 class="question-title">¿Qué síntomas te molestan más actualmente?</h1>
+                <p class="question-subtitle">Selecciona todo lo que aplique</p>
+
+                <!-- Circadiano -->
+                <div class="symptoms-block">
+                    <h3 class="block-title">Sueño y Cansancio</h3>
+                    <div class="options-checkbox-list">
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="sueño" data-block="circadiano">
+                            <div class="checkbox-content"><span class="checkbox-text">Dificultad para dormir</span><span
+                                    class="checkbox-emoji">😴</span></div>
+                        </label>
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="cansancio" data-block="circadiano">
+                            <div class="checkbox-content"><span class="checkbox-text">Cansancio constante</span><span
+                                    class="checkbox-emoji">⚡</span></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Inflamación -->
+                <div class="symptoms-block">
+                    <h3 class="block-title">Inflamación y Peso</h3>
+                    <div class="options-checkbox-list">
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="barriga" data-block="inflamacion">
+                            <div class="checkbox-content"><span class="checkbox-text">Barriga inflamada</span><span
+                                    class="checkbox-emoji">🎈</span></div>
+                        </label>
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="antojos" data-block="inflamacion">
+                            <div class="checkbox-content"><span class="checkbox-text">Antojos por dulces</span><span
+                                    class="checkbox-emoji">🍫</span></div>
+                        </label>
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="peso" data-block="inflamacion">
+                            <div class="checkbox-content"><span class="checkbox-text">Aumento de peso
+                                    inesperado</span><span class="checkbox-emoji">⚖️</span></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Estructura -->
+                <div class="symptoms-block">
+                    <h3 class="block-title">Cuerpo y Músculos</h3>
+                    <div class="options-checkbox-list">
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="dolor" data-block="estructura">
+                            <div class="checkbox-content"><span class="checkbox-text">Dolor articular</span><span
+                                    class="checkbox-emoji">🦴</span></div>
+                        </label>
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="flacidez" data-block="estructura">
+                            <div class="checkbox-content"><span class="checkbox-text">Flacidez muscular</span><span
+                                    class="checkbox-emoji">💪</span></div>
+                        </label>
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="debilidad" data-block="estructura">
+                            <div class="checkbox-content"><span class="checkbox-text">Debilidad / Falta de
+                                    fuerza</span><span class="checkbox-emoji">🔋</span></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="symptoms-block">
+                    <div class="options-checkbox-list">
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="symptoms" value="ninguno" data-block="ninguno">
+                            <div class="checkbox-content"><span class="checkbox-text">Ninguno de estos</span><span
+                                    class="checkbox-emoji">✨</span></div>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="continue-btn" id="continueSymptoms" data-next="step_physical" disabled>
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- VALIDATION 7 -->
+        <div class="quiz-step" id="validation7" data-step="8">
+            <div class="validation-content">
+                <div class="circular-loader">
+                    <svg class="nav-progress-ring" width="120" height="120">
+                        <circle class="progress-ring__circle-bg" stroke="#f0f0f0" stroke-width="8" fill="transparent"
+                            r="50" cx="60" cy="60" />
+                        <circle class="progress-ring__circle" id="validationLoaderCircle" stroke="#C9A55C"
+                            stroke-width="8" fill="transparent" r="50" cx="60" cy="60" />
+                    </svg>
+                    <span class="loader-percentage" id="validationLoaderPercentage">0%</span>
+                </div>
+
+                <p class="validation-text" id="symptomsValidationText">Estos síntomas están directamente relacionados
+                    con
+                    cambios en estrógeno, cortisol e insulina.</p>
+                <button class="continue-btn" id="validation7Btn" data-next="step_physical">
+                    <p>Continuar</p>
+                </button>
+            </div>
+
+        </div>
+
+
+
+        <!-- VALIDATION 8 -->
+        <div class="quiz-step" id="validation8" data-step="10">
+            <div class="validation-content">
+
+                <div class="validation-image-container">
+                    <img src="shield_metabolic_protection.png" alt="Escudo Metabólico" class="validation-image"
+                        style="max-width: 120px;">
+                </div>
+                <p class="validation-text">No es falta de disciplina. En la menopausia, los métodos tradicionales
+                    activan los bloqueos metabólicos y el cuerpo se defiende.</p>
+                <button class="continue-btn" data-next="step9">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- VALIDATION EXTRA: COMODIDAD (MICRO-FEEDBACK) -->
+        <div class="quiz-step" id="validation_comfort" data-step="11">
+            <div class="validation-content">
+                <div class="circular-loader">
+                    <svg class="nav-progress-ring" width="140" height="140">
+                        <circle class="progress-ring__circle-bg" stroke="#f0f0f0" stroke-width="8" fill="transparent"
+                            r="60" cx="70" cy="70" />
+                        <circle class="progress-ring__circle" id="comfortLoaderCircle" stroke="#C9A55C" stroke-width="8"
+                            fill="transparent" r="60" cx="70" cy="70" stroke-linecap="round" />
+                    </svg>
+                    <span class="loader-percentage" id="comfortLoaderPercentage">0%</span>
+                </div>
+                <p class="validation-text" id="validationComfortText">Cargando...</p>
+                <button class="continue-btn" id="validationComfortBtn" data-next="step_graph">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 12: GRÁFICO HORMONAL -->
+        <div class="quiz-step" id="step_graph" data-step="10">
+            <div class="step-content">
+
+                <h1 class="question-title">Lo que pasa con tu cuerpo después de la menopausia</h1>
+                <p class="question-subtitle">Y por qué las dietas tradicionales dejan de funcionar</p>
+
+                <div class="graph-container" style="text-align: center; margin: 20px 0;">
+                    <img src="hormonal_vs_traditional_graph_v2_1769194743055.png" alt="Gráfico Hormonal vs Tradicional"
+                        style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                </div>
+
+                <button class="continue-btn" data-next="step9" style="margin-bottom: 20px;">
+                    <p>Entiendo, quiero corregirlo</p>
+                </button>
+
+                <div class="graph-text-block"
+                    style="text-align: left; background: #fff5f5; padding: 15px; border-radius: 8px; border-left: 4px solid #ff6b6b; margin-bottom: 20px;">
+                    <p style="font-weight: 500; margin-bottom: 10px;">Después de la caída del estrógeno, el cuerpo deja
+                        de responder a dietas normales.</p>
+                    <p style="margin-bottom: 10px;">Por eso:</p>
+                    <ul style="list-style: none; padding-left: 10px; margin-bottom: 10px;">
+                        <li>• bajas un poco</li>
+                        <li>• vuelves a subir</li>
+                        <li>• te inflamas más</li>
+                        <li>• te frustras</li>
+                    </ul>
+                    <p style="font-weight: 700; color: #d32f2f;">La solución no es comer menos. Es corregir el bloqueo
+                        hormonal primero.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ETAPA 13: OBJETIVOS PRINCIPALES -->
+        <div class="quiz-step" id="step9" data-step="11">
+            <div class="step-content">
+
+
+                <h1 class="question-title">¿Qué te gustaría mejorar primero?</h1>
+                <div class="options-checkbox-list">
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="barriga">
+                        <div class="checkbox-content"><span class="checkbox-text">Reducir barriga</span><span
+                                class="checkbox-emoji">🔥</span></div>
+                    </label>
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="dormir">
+                        <div class="checkbox-content"><span class="checkbox-text">Dormir mejor</span><span
+                                class="checkbox-emoji">😴</span></div>
+                    </label>
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="energia">
+                        <div class="checkbox-content"><span class="checkbox-text">Tener más energía</span><span
+                                class="checkbox-emoji">⚡</span></div>
+                    </label>
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="sofocos">
+                        <div class="checkbox-content"><span class="checkbox-text">Menos sofocos</span><span
+                                class="checkbox-emoji">🌡️</span></div>
+                    </label>
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="ligera">
+                        <div class="checkbox-content"><span class="checkbox-text">Sentirme más ligera</span><span
+                                class="checkbox-emoji">🍃</span></div>
+                    </label>
+                </div>
+                <button class="continue-btn" id="continueGoals" data-next="step_comfort" disabled>
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 14: DURACIÓN -->
+        <div class="quiz-step" id="step_comfort" data-step="12">
+            <div class="step-content">
+                <h1 class="question-title">¿Cuánto tiempo llevas sintiéndote así?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="pocos-meses" data-next="step8">
+                        <div class="option-content"><span class="option-text">Hace pocos meses</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="6-meses-1-ano" data-next="step8">
+                        <div class="option-content"><span class="option-text">Entre 6 meses y 1 año</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="mas-1-ano" data-next="validation_duration">
+                        <div class="option-content"><span class="option-text">Más de un año</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="no-recuerdo" data-next="validation_duration">
+                        <div class="option-content"><span class="option-text">Ya no recuerdo cuándo empecé</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION DURATION -->
+        <div class="quiz-step" id="validation_duration" data-step="12">
+            <div class="validation-content">
+                <div class="validation-icon">⏳</div>
+                <p class="validation-text">Cuando estos síntomas se mantienen por meses, el cuerpo suele entrar en un
+                    estado
+                    de inflamación persistente.</p>
+                <button class="continue-btn" data-next="step8">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 15: INTENTOS -->
+        <div class="quiz-step" id="step8" data-step="13">
+            <div class="step-content">
+                <h1 class="question-title">¿Qué has intentado para mejorar estos síntomas?</h1>
+                <div class="options-list">
+                    <button class="option-card-large" data-value="alimentacion" data-next="validation_attempts">
+                        <div class="option-content"><span class="option-text">Cambiar mi alimentación</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="internet" data-next="validation_attempts">
+                        <div class="option-content"><span class="option-text">Seguir dietas o consejos de
+                                internet</span>
+                        </div>
+                    </button>
+                    <button class="option-card-large" data-value="ejercicio" data-next="validation_attempts">
+                        <div class="option-content"><span class="option-text">Hacer ejercicio con más constancia</span>
+                        </div>
+                    </button>
+                    <button class="option-card-large" data-value="suplementos" data-next="validation_attempts">
+                        <div class="option-content"><span class="option-text">Tomar suplementos o tés</span></div>
+                    </button>
+                    <button class="option-card-large" data-value="nada-funciono" data-next="validation_attempts">
+                        <div class="option-content"><span class="option-text">Nada ha funcionado hasta ahora</span>
+                        </div>
+                    </button>
+                    <button class="option-card-large" data-value="nada-intento" data-next="loading">
+                        <div class="option-content"><span class="option-text">Aún no he intentado nada</span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALIDATION ATTEMPTS -->
+        <div class="quiz-step" id="validation_attempts" data-step="13">
+            <div class="validation-content">
+                <div class="validation-icon">⚠️</div>
+                <p class="validation-text">En esta etapa, cambiar hábitos sin ajustar la base hormonal suele traer pocos
+                    resultados.</p>
+                <button class="continue-btn" data-next="testimonials">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 10: LOADING -->
+        <div class="quiz-step" id="loading" data-step="loading">
+            <div class="loading-content">
+                <h2 class="loading-title">Analizando tus respuestas…</h2>
+
+                <div class="analysis-progress-container">
+                    <div class="analysis-percentage" id="analysisPercentage">0%</div>
+                    <div class="analysis-bar-bg">
+                        <div class="analysis-bar-fill" id="analysisBarFill"></div>
+                    </div>
+                </div>
+
+                <div class="loading-messages-container">
+                    <p id="loadingMessage" class="loading-message-text">Analizando tus síntomas principales</p>
+                </div>
+
+                <p class="loading-subtext">Este análisis nos permite adaptar el protocolo a tu situación actual.</p>
+            </div>
+        </div>
+
+        <!-- ETAPA 11: DIAGNÓSTICO FINAL -->
+        <div class="quiz-step" id="diagnosis" data-step="result">
+            <div class="diag-page">
+
+                <h1 class="diag-title">Tu Perfil Hormonal</h1>
+                <p class="diag-subtitle" id="diagSubtitle">Basado en tus respuestas</p>
+
+                <!-- Resumen Personalizado -->
+                <div class="diag-card diag-card-personal" id="diagPersonalCard">
+                    <div class="diag-card-body">
+                        <p id="diagPersonalText" style="font-size: 1.1rem; line-height: 1.6;"></p>
+                    </div>
+                </div>
+
+                <!-- Hormonal Balance Bar -->
+                <div class="diag-bar-container">
+                    <div class="diag-bar">
+                        <div class="diag-bar-fill"></div>
+                        <div class="diag-bar-marker"></div>
+                    </div>
+                    <div class="diag-bar-labels">
+                        <span>Balance</span>
+                        <span>Riesgo</span>
+                        <span>Inflamación</span>
+                    </div>
+                </div>
+
+                <!-- Síntomas Identificados -->
+                <div class="diag-card diag-card-warning">
+                    <div class="diag-card-icon" id="diagIcon1">⚠️</div>
+                    <div class="diag-card-body">
+                        <h3 id="diagTitle1">Síntomas identificados</h3>
+                        <p id="diagText1"></p>
+                    </div>
+                </div>
+
+                <button class="continue-btn" data-next="diagnosis_part2" style="margin-top: 20px;">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 11.5: DIAGNÓSTICO PARTE 2 -->
+        <div class="quiz-step" id="diagnosis_part2" data-step="result">
+            <div class="diag-page">
+
+                <!-- Las 3 Fallas Metabólicas (Consolidated from Version 2) -->
+                <div class="fallas-section"
+                    style="margin: 20px 0; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h3 class="fallas-title"
+                        style="color: #4a4a4a; margin-bottom: 20px; font-size: 1.2rem; text-align: center;">Las 3 Fallas
+                        Metabólicas identificadas:</h3>
+                    <div class="fallas-list">
+                        <div class="falla-item"
+                            style="display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start;">
+                            <span class="falla-number"
+                                style="background: #C9A55C; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">1</span>
+                            <div class="falla-content">
+                                <h4 style="margin: 0 0 5px 0; color: #2c2c2c;">Inflamación Crónica</h4>
+                                <p style="margin: 0; font-size: 0.95rem; color: #666; line-height: 1.4;">Tu cuerpo está
+                                    en modo inflamatorio constante, lo que bloquea la pérdida de peso.</p>
+                            </div>
+                        </div>
+                        <div class="falla-item"
+                            style="display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start;">
+                            <span class="falla-number"
+                                style="background: #C9A55C; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">2</span>
+                            <div class="falla-content">
+                                <h4 style="margin: 0 0 5px 0; color: #2c2c2c;">Resistencia a la Insulina</h4>
+                                <p style="margin: 0; font-size: 0.95rem; color: #666; line-height: 1.4;">Tu metabolismo
+                                    almacena grasa en lugar de quemarla, especialmente en la zona abdominal.</p>
+                            </div>
+                        </div>
+                        <div class="falla-item" style="display: flex; gap: 15px; align-items: flex-start;">
+                            <span class="falla-number"
+                                style="background: #C9A55C; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">3</span>
+                            <div class="falla-content">
+                                <h4 style="margin: 0 0 5px 0; color: #2c2c2c;">Desregulación Hormonal</h4>
+                                <p style="margin: 0; font-size: 0.95rem; color: #666; line-height: 1.4;">La caída de
+                                    estrógeno ha desequilibrado tus señales de hambre y saciedad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Good News Card -->
+                <div class="diag-card diag-card-success">
+                    <h3 class="diag-card-success-title">Buenas noticias</h3>
+                    <p class="diag-card-success-intro">Basado en tu perfil, tu solución en 21 días:</p>
+                    <ul class="diag-solution-list" id="diagSolutions">
+                        <li><span class="diag-sol-icon">🍽️</span> <span id="diagSol1">Combinaciones estratégicas de
+                                alimentos</span></li>
+                        <li><span class="diag-sol-icon">⏰</span> <span id="diagSol2">Horarios que regulan tus
+                                hormonas</span></li>
+                        <li><span class="diag-sol-icon">🥚</span> <span id="diagSol3">Protocolo personalizado para tus
+                                síntomas</span></li>
+                    </ul>
+                </div>
+
+                <button class="continue-btn pulse-btn" data-next="transition_email">
+                    <p>Ver mi protocolo personalizado</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- PASO 1: RESULTADO + GRÁFICO (NUEVO) -->
+        <div class="quiz-step" id="transition_result" data-step="result_graph">
+            <div class="transition-content">
+                <h1 class="transition-title">Tu protocolo personalizado para reducir síntomas de la menopausia ya está
+                    listo</h1>
+                <p class="transition-subtitle">Resultados visibles en 7–28 días sin dietas ni medicamentos</p>
+
+                <div class="projection-graph-container" style="margin: 30px 0; text-align: center;">
+                    <img src="menopause_transformation_before_after.png" class="graph-image"
+                        alt="Transformación Antes y Después">
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 15px; line-height: 1.4;">
+                        Basado en tus respuestas, tu cuerpo puede reducir inflamación, mejorar energía y regular
+                        hormonas en las próximas 4 semanas siguiendo un protocolo correcto.
+                    </p>
+                </div>
+
+                <div class="diagnosis-footer">
+                    <button class="continue-btn" data-next="transition_includes">
+                        <p>Continuar</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASO 2: QUÉ INCLUYE (NUEVO) -->
+        <div class="quiz-step" id="transition_includes" data-step="includes">
+            <div class="transition-content">
+                <h1 class="transition-title">¿Qué incluye tu Protocolo Menopausia con Claridad?</h1>
+
+                <div class="includes-grid">
+                    <div class="include-card">
+                        <div class="include-icon">🍽️</div>
+                        <div class="include-info">
+                            <h3>Recetas Anti-Inflamatorias</h3>
+                            <p>Combinaciones de proteína + fibra + grasa buena para regular insulina.</p>
+                        </div>
+                    </div>
+                    <div class="include-card">
+                        <div class="include-icon">⏰</div>
+                        <div class="include-info">
+                            <h3>Creador de Rutina Diaria</h3>
+                            <p>Horarios automáticos de comidas y luz según tu ritmo circadiano.</p>
+                        </div>
+                    </div>
+                    <div class="include-card">
+                        <div class="include-icon">🌙</div>
+                        <div class="include-info">
+                            <h3>Protocolo de Sueño</h3>
+                            <p>Pasos simples para dormir mejor y despertar con energía en 7 días.</p>
+                        </div>
+                    </div>
+                    <div class="include-card">
+                        <div class="include-icon">🧠</div>
+                        <div class="include-info">
+                            <h3>Guía Hormonal Simplificada</h3>
+                            <p>Entiende por qué tu cuerpo cambió y cómo revertirlo.</p>
+                        </div>
+                    </div>
+                    <div class="include-card">
+                        <div class="include-icon">📊</div>
+                        <div class="include-info">
+                            <h3>Seguimiento Visual</h3>
+                            <p>Panel simple para ver reducción de síntomas semana a semana.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagnosis-footer">
+                    <button class="continue-btn" data-next="offer_screen">
+                        <p>Continuar</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- PASO 4: EMAIL CAPTURE (NUEVO) -->
+        <div class="quiz-step" id="transition_email" data-step="email">
+            <div class="email-content">
+                <h1 class="transition-title">Recibe tu protocolo personalizado ahora</h1>
+                <p class="transition-subtitle">Te enviamos tu rutina, recetas y diagnóstico hormonal por email.</p>
+
+                <div class="email-form-container">
+                    <input type="email" id="userEmail" class="email-input" placeholder="Ingresa tu correo electrónico"
+                        required>
+                    <button class="continue-btn pulse-btn" id="emailSubmitBtn" data-next="transition_result">
+                        <p>Recibir mi protocolo ahora</p>
+                    </button>
+                    <p class="email-privacy">🔒 Tus datos están 100% seguros y no compartimos tu información.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASO 5: OFERTA FINAL (NUEVO) -->
+        <!-- PASO 5: OFERTA FINAL LONG-FORM -->
+        <div class="quiz-step" id="offer_screen" data-step="offer">
+
+            <!-- Redundant Sticky Discount Bar Removed (Integrated into Header) -->
+
+
+            <div class="offer-long-container">
+
+                <!-- A. Timer Bar -->
+                <div class="offer-timer-bar">
+                    <span class="timer-icon">🔥</span>
+                    <p>Oferta especial expira en: <strong id="offerTimer">14:59</strong></p>
+                </div>
+
+                <!-- B. Body Comparison -->
+                <div class="offer-section comparison-section">
+                    <h2 class="offer-section-title">Tu transformación proyectada</h2>
+                    <div class="body-comparison">
+                        <div class="body-state">
+                            <div class="state-label now">Ahora</div>
+                            <div class="state-stats">
+                                <div class="stat-row"><span class="stat-label">Síntomas:</span> <span
+                                        class="stat-value bad">Frecuentes</span></div>
+                                <div class="stat-row"><span class="stat-label">Energía:</span> <span
+                                        class="stat-value bad">Baja</span></div>
+                                <div class="stat-row"><span class="stat-label">Inflamación:</span> <span
+                                        class="stat-value bad">Alta</span></div>
+                                <div class="stat-row"><span class="stat-label">Sueño:</span> <span
+                                        class="stat-value bad">Irregular</span></div>
+                            </div>
+                        </div>
+                        <div class="state-arrow">→</div>
+                        <div class="body-state">
+                            <div class="state-label goal">Tu Meta</div>
+                            <div class="state-stats">
+                                <div class="stat-row"><span class="stat-label">Síntomas:</span> <span
+                                        class="stat-value good">Controlados</span></div>
+                                <div class="stat-row"><span class="stat-label">Energía:</span> <span
+                                        class="stat-value good">Estable</span></div>
+                                <div class="stat-row"><span class="stat-label">Inflamación:</span> <span
+                                        class="stat-value good">Reducida</span></div>
+                                <div class="stat-row"><span class="stat-label">Sueño:</span> <span
+                                        class="stat-value good">Reparador</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- C. Plan Selector (1st instance) -->
+                <div class="offer-section plans-section">
+                    <h2 class="offer-section-title">Tu protocolo personalizado está listo</h2>
+
+                    <div class="progress-checkmarks">
+                        <div class="check-item done"><span class="check-icon">✓</span> Perfil hormonal analizado</div>
+                        <div class="check-item done"><span class="check-icon">✓</span> Síntomas identificados</div>
+                        <div class="check-item done"><span class="check-icon">✓</span> Ritmo circadiano mapeado</div>
+                        <div class="check-item done"><span class="check-icon">✓</span> Índice de inflamación estimado
+                        </div>
+                        <div class="check-item done"><span class="check-icon">✓</span> Plan de nutrición sincronizado
+                        </div>
+                        <div class="check-item done"><span class="check-icon">✓</span> Protocolo personalizado creado
+                        </div>
+                    </div>
+
+                    <div class="plans-vertical" id="plansFirst">
+                        <label class="plan-label" data-plan="7dias">
+                            <input type="radio" name="planFirst" value="7dias" class="plan-radio">
+                            <div class="plan-info">
+                                <div class="plan-name-row">
+                                    <span class="p-name">PLAN 7 DÍAS</span>
+                                </div>
+                                <div class="p-price-row">
+                                    <span class="p-original">US$ 64.50</span>
+                                    <span class="p-discounted">US$ 12.90</span>
+                                </div>
+                            </div>
+                            <div class="p-per-day">
+                                <span class="p-per-day-value">US$ 1<sup>.84</sup></span>
+                                <span class="p-per-day-label">por día</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-label selected" data-plan="4semanas">
+                            <input type="radio" name="planFirst" value="4semanas" class="plan-radio" checked>
+                            <div class="plan-info">
+                                <div class="plan-name-row">
+                                    <span class="p-name">PLAN 4 SEMANAS</span>
+                                </div>
+                                <div class="p-price-row">
+                                    <span class="p-original">US$ 99.50</span>
+                                    <span class="p-discounted">US$ 19.90</span>
+                                </div>
+                            </div>
+                            <div class="p-per-day">
+                                <span class="p-per-day-value">US$ 0<sup>.71</sup></span>
+                                <span class="p-per-day-label">por día</span>
+                            </div>
+                            <div class="popular-banner">MÁS POPULAR: 80% OFF</div>
+                        </label>
+
+                        <label class="plan-label" data-plan="12semanas">
+                            <input type="radio" name="planFirst" value="12semanas" class="plan-radio">
+                            <div class="plan-info">
+                                <div class="plan-name-row">
+                                    <span class="p-name">PLAN 12 SEMANAS</span>
+                                </div>
+                                <div class="p-price-row">
+                                    <span class="p-original">US$ 149.50</span>
+                                    <span class="p-discounted">US$ 29.90</span>
+                                </div>
+                            </div>
+                            <div class="p-per-day">
+                                <span class="p-per-day-value">US$ 0<sup>.35</sup></span>
+                                <span class="p-per-day-label">por día</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button class="offer-cta-btn pulse-btn" data-checkout="first">
+                        Comenzar mi protocolo ahora
+                    </button>
+                </div>
+
+                <!-- D. Highlights Section -->
+                <div class="offer-section highlights-section-long">
+                    <h2 class="highlights-title">Lo que incluye tu protocolo</h2>
+
+                    <div class="highlight-item">
+                        <div class="highlight-icon">📱</div>
+                        <div class="h-content">
+                            <h4>Acceso Premium a la App "Claridad"</h4>
+                            <p>Tu protocolo completo, paso a paso, en la palma de tu mano para llevar a cualquier lugar.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">📅</div>
+                        <div class="h-content">
+                            <h4>Programador Automático de Rutina</h4>
+                            <p>La app programa tus horarios ideales para comer, tomar sol y descansar según tu perfil.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🔔</div>
+                        <div class="h-content">
+                            <h4>Recordatorios e Integración de Calendario</h4>
+                            <p>Recibe alertas automáticas en tu celular. Olvida el estrés de planificar; nosotros lo
+                                hacemos por ti.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🥗</div>
+                        <div class="h-content">
+                            <h4>Recetario Inteligente Anti-Inflamatorio</h4>
+                            <p>Platos deliciosos que regulan el cortisol y equilibran tus hormonas día tras día.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">⚖️</div>
+                        <div class="h-content">
+                            <h4>Monitor de Progreso Metabólico</h4>
+                            <p>Visualiza cómo tus síntomas se reducen y tu energía vuelve a niveles óptimos semana a
+                                semana.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">🤝</div>
+                        <div class="h-content">
+                            <h4>Soporte Prioritario y Comunidad</h4>
+                            <p>Acompañamiento directo y acceso a nuestra comunidad exclusiva de mujeres.</p>
+                        </div>
+                    </div>
+
+                    <!-- Visual Routine Preview -->
+                    <div class="routine-preview-card">
+                        <div class="routine-preview-text">
+                            <h3>Tu semana, organizada sin estrés</h3>
+                            <p>Olvida las hojas de Excel o las notas pegadas. La App sincroniza todo lo que necesitas
+                                hacer en un solo lugar.</p>
+                        </div>
+                        <div class="routine-preview-image">
+                            <img src="app-calendar.png" alt="Vista del calendario de la App Claridad">
+                        </div>
+                    </div>
+
+                    <button class="offer-cta-btn secondary" data-checkout="highlights">
+                        Quiero comenzar ahora
+                    </button>
+                </div>
+
+                <!-- E. User Success Stories -->
+                <div class="offer-section success-stories-section">
+                    <h2 class="offer-section-title">Historias de éxito:</h2>
+
+                    <div class="success-stories-grid">
+                        <div class="success-card-v2">
+                            <div class="success-photo">
+                                <img src="success_ana.png" alt="Ana - Antes y Después">
+                            </div>
+                            <h4 class="success-headline">Bajó 4 cm de cintura en 3 semanas</h4>
+                            <p class="success-quote-v2">"No hice dieta extrema. Solo cambié combinaciones y horarios
+                                como indica el protocolo. Mi ropa vuelve a quedarme y tengo más energía que antes."</p>
+                            <div class="success-footer">
+                                <span class="success-author-v2">Ana, 49</span>
+                                <div class="success-stars">★★★★★</div>
+                            </div>
+                        </div>
+
+                        <div class="success-card-v2">
+                            <div class="success-photo">
+                                <img src="success_laura.png" alt="Laura - Antes y Después">
+                            </div>
+                            <h4 class="success-headline">Eliminó sofocos en 12 días</h4>
+                            <p class="success-quote-v2">"Nunca pensé que regular mis horarios de comida iba a impactar
+                                tanto mis sofocos. Ahora duermo toda la noche sin despertarme sudando."</p>
+                            <div class="success-footer">
+                                <span class="success-author-v2">Laura, 52</span>
+                                <div class="success-stars">★★★★★</div>
+                            </div>
+                        </div>
+
+                        <div class="success-card-v2">
+                            <div class="success-photo">
+                                <img src="success_marta.png" alt="Marta - Antes y Después">
+                            </div>
+                            <h4 class="success-headline">Duerme 7 horas seguidas</h4>
+                            <p class="success-quote-v2">"Después de años sin dormir bien, el protocolo de sueño me
+                                devolvió mis noches. Me siento otra persona con energía todo el día."</p>
+                            <div class="success-footer">
+                                <span class="success-author-v2">Marta, 55</span>
+                                <div class="success-stars">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- F. Plan Selector (2nd instance) -->
+                <div class="offer-section plans-section">
+                    <h2 class="offer-section-title">Resultados visibles en 4 semanas</h2>
+                    <p class="plans-subtitle">Elige el plan que mejor se adapte a ti:</p>
+
+                    <div class="plans-vertical" id="plansSecond">
+                        <label class="plan-label" data-plan="7dias">
+                            <input type="radio" name="planSecond" value="7dias" class="plan-radio">
+                            <div class="plan-info">
+                                <div class="plan-name-row">
+                                    <span class="p-name">PLAN 7 DÍAS</span>
+                                </div>
+                                <div class="p-price-row">
+                                    <span class="p-original">US$ 64.50</span>
+                                    <span class="p-discounted">US$ 12.90</span>
+                                </div>
+                            </div>
+                            <div class="p-per-day">
+                                <span class="p-per-day-value">US$ 1<sup>.84</sup></span>
+                                <span class="p-per-day-label">por día</span>
+                            </div>
+                        </label>
+
+                        <label class="plan-label selected" data-plan="4semanas">
+                            <input type="radio" name="planSecond" value="4semanas" class="plan-radio" checked>
+                            <div class="plan-info">
+                                <div class="plan-name-row">
+                                    <span class="p-name">PLAN 4 SEMANAS</span>
+                                </div>
+                                <div class="p-price-row">
+                                    <span class="p-original">US$ 99.50</span>
+                                    <span class="p-discounted">US$ 19.90</span>
+                                </div>
+                            </div>
+                            <div class="p-per-day">
+                                <span class="p-per-day-value">US$ 0<sup>.71</sup></span>
+                                <span class="p-per-day-label">por día</span>
+                            </div>
+                            <div class="popular-banner">MÁS POPULAR: 80% OFF</div>
+                        </label>
+
+                        <label class="plan-label" data-plan="12semanas">
+                            <input type="radio" name="planSecond" value="12semanas" class="plan-radio">
+                            <div class="plan-info">
+                                <div class="plan-name-row">
+                                    <span class="p-name">PLAN 12 SEMANAS</span>
+                                </div>
+                                <div class="p-price-row">
+                                    <span class="p-original">US$ 149.50</span>
+                                    <span class="p-discounted">US$ 29.90</span>
+                                </div>
+                            </div>
+                            <div class="p-per-day">
+                                <span class="p-per-day-value">US$ 0<sup>.35</sup></span>
+                                <span class="p-per-day-label">por día</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button class="offer-cta-btn pulse-btn" data-checkout="second">
+                        Comenzar mi protocolo ahora
+                    </button>
+                </div>
+
+                <!-- G. FAQ Section -->
+                <div class="offer-section faq-section">
+                    <h2 class="faq-title">Preguntas frecuentes</h2>
+
+                    <div class="faq-item">
+                        <button class="faq-question">¿Qué es el Protocolo Menopausia con Claridad? <span
+                                class="faq-arrow">+</span></button>
+                        <div class="faq-answer">
+                            <p>Es un programa digital personalizado basado en tu perfil hormonal que te ayuda a reducir
+                                síntomas de la menopausia (sofocos, insomnio, grasa abdominal, fatiga) a través de
+                                combinaciones estratégicas de alimentos, regulación circadiana y protocolos de sueño —
+                                sin dietas extremas ni medicamentos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cuánto tiempo toma ver resultados? <span
+                                class="faq-arrow">+</span></button>
+                        <div class="faq-answer">
+                            <p>La mayoría de las mujeres reportan mejoras en energía y sueño dentro de los primeros 7
+                                días. La reducción de inflamación abdominal y sofocos es visible entre las semanas 2 y
+                                4, dependiendo de tu nivel de adherencia al protocolo.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">¿Necesito comprar suplementos o medicamentos? <span
+                                class="faq-arrow">+</span></button>
+                        <div class="faq-answer">
+                            <p>No. El protocolo se basa 100% en alimentos reales, horarios estratégicos y hábitos
+                                naturales. No necesitas comprar suplementos, medicamentos ni productos adicionales.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">¿Necesito hacer ejercicio intenso? <span
+                                class="faq-arrow">+</span></button>
+                        <div class="faq-answer">
+                            <p>No. El protocolo no requiere entrenamientos extenuantes. Se enfoca en movimientos suaves
+                                y regulación metabólica a través de alimentación y ritmo circadiano. Si deseas agregar
+                                ejercicio, el plan se adapta a tu nivel.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">¿Funciona si ya probé muchas dietas sin éxito? <span
+                                class="faq-arrow">+</span></button>
+                        <div class="faq-answer">
+                            <p>Sí. Precisamente por eso funciona diferente: no es una dieta. Es una corrección hormonal
+                                y metabólica adaptada a los cambios que ocurren después de los 40. Mujeres que
+                                fracasaron con dietas ven resultados porque atacamos la raíz del problema, no solo los
+                                síntomas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cómo recibo el protocolo? <span
+                                class="faq-arrow">+</span></button>
+                        <div class="faq-answer">
+                            <p>Inmediatamente después del pago recibirás acceso digital completo a tu protocolo
+                                personalizado: recetas, rutinas, guías y seguimiento. Todo accesible desde tu celular o
+                                computadora, 24/7.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- H. Risk-Free Guarantee -->
+                <div class="offer-section guarantee-section">
+                    <div class="guarantee-box">
+                        <div class="guarantee-seal-premium">
+                            <svg class="curved-text-svg" viewBox="0 0 200 200">
+                                <defs>
+                                    <path id="curve-top-seal" d="M 20,100 A 80,80 0 0,1 180,100" fill="none" />
+                                    <path id="curve-bottom-seal" d="M 10,115 A 90,90 0 0,0 190,115" fill="none" />
+                                </defs>
+                                <text class="seal-text-top">
+                                    <textPath href="#curve-top-seal" startOffset="50%" text-anchor="middle">
+                                        GARANTÍA</textPath>
+                                </text>
+                                <text class="seal-text-bottom">
+                                    <textPath href="#curve-bottom-seal" startOffset="50%" text-anchor="middle">
+                                        INCONDICIONAL</textPath>
+                                </text>
+                            </svg>
+                            <div class="seal-body"></div>
+                            <div class="seal-banner">7 DÍAS</div>
+                        </div>
+                        <h3 class="guarantee-title">Garantía sin riesgo</h3>
+                        <p class="guarantee-desc">Si en 7 días no notas mejoras en tu energía, sueño o síntomas, te
+                            devolvemos el 100% de tu inversión. Sin preguntas.</p>
+                    </div>
+
+                    <button class="offer-cta-btn pulse-btn final-cta" data-checkout="guarantee">
+                        Comenzar mi protocolo ahora — Sin riesgo
+                    </button>
+                    <p class="offer-final-note">Acceso inmediato · 100% digital · Garantía de 7 días</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ETAPA: PROBLEMAS FÍSICOS (Adicionado) -->
+        <div class="quiz-step" id="step_physical" data-step="9">
+            <div class="step-content">
+
+                <h1 class="question-title">¿Sientes alguno de estos síntomas físicos?</h1>
+                <p class="question-subtitle">Selecciona todo lo que te pase con frecuencia</p>
+
+                <div class="options-checkbox-list">
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="physicalProblems" value="rodillas" data-problem="rodillas">
+                        <div class="checkbox-content">
+                            <span class="checkbox-text">Dolores en las rodillas o articulaciones</span>
+                            <span class="checkbox-emoji">🦵</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="physicalProblems" value="rigidez" data-problem="rigidez">
+                        <div class="checkbox-content">
+                            <span class="checkbox-text">Rigidez en cuello, hombros o espalda al despertar</span>
+                            <span class="checkbox-emoji">🧘‍♀️</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="physicalProblems" value="debilidad" data-problem="debilidad">
+                        <div class="checkbox-content">
+                            <span class="checkbox-text">Sensación de debilidad o pérdida de fuerza</span>
+                            <span class="checkbox-emoji">💪</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="physicalProblems" value="cansancio" data-problem="cansancio">
+                        <div class="checkbox-content">
+                            <span class="checkbox-text">Me canso más rápido que antes</span>
+                            <span class="checkbox-emoji">😮‍💨</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="physicalProblems" value="ninguno" data-problem="ninguno">
+                        <div class="checkbox-content">
+                            <span class="checkbox-text">Ninguno de estos</span>
+                            <span class="checkbox-emoji">✨</span>
+                        </div>
+                    </label>
+                </div>
+
+                <button class="continue-btn" id="continuePhysicalProblems" data-next="validation6_5" disabled>
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- TELA DE VALIDAÇÃO 6.5: Feedback por Problemas Físicos -->
+        <div class="quiz-step" id="validation6_5" data-step="9">
+            <div class="validation-content">
+
+                <div class="validation-icon" id="physicalProblemsIcon">⚠️</div>
+                <h2 class="validation-title" id="physicalProblemsTitle">Dato importante:</h2>
+                <p class="validation-text" id="physicalProblemsText">Cargando...</p>
+
+                <div class="validation-image-container">
+                    <img id="physicalProblemsImage" src="val_physical_general.png" alt="Detalle Síntoma"
+                        class="validation-image">
+                </div>
+
+                <button class="continue-btn" data-next="step_graph">
+                    <p>Continuar</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ETAPA 8.5: Depoimentos - Prova Social das 3 Falhas -->
+        <div class="quiz-step" id="testimonials" data-step="15">
+            <div class="testimonials-content">
+                <h1 class="testimonials-headline">No es dieta. Es regulación hormonal.</h1>
+                <p class="testimonials-subtext">Resultados reales de mujeres que corrigieron su metabolismo después de
+                    los 40</p>
+
+                <!-- Wrapper para Carrossel Mobile -->
+                <div class="testimonials-slider">
+                    <!-- Depoimento 1: Ritmo Circadiano -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="testimonial_circadian_rhythm_1769168668597.png"
+                                alt="Transformación - Ritmo Circadiano">
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-quote">"Solo cambiando mis primeros 15 minutos del día, dejé de
+                                despertarme cansada y empecé a desinflamar sin dieta."</p>
+                            <div class="testimonial-author">
+                                <span class="author-name">María González, 47 años</span>
+                                <div class="author-stars">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Depoimento 2: Insulina -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="testimonial_insulin_resistance_1769168684046.png"
+                                alt="Transformación - Resistencia a la Insulina">
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-quote">"Cuando empecé a combinar proteína y fibra en el desayuno, mi
+                                ansiedad por dulces desapareció en una semana."</p>
+                            <div class="testimonial-author">
+                                <span class="author-name">Carmen Rodríguez, 52 años</span>
+                                <div class="author-stars">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Depoimento 3: Estrutura Muscular -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-image">
+                            <img src="testimonial_muscle_structure_1769168698633.png"
+                                alt="Transformación - Estructura Muscular">
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-quote">"Volví a tener fuerza en las piernas y mis dolores articulares
+                                bajaron muchísimo."</p>
+                            <div class="testimonial-author">
+                                <span class="author-name">Isabel Martínez, 55 años</span>
+                                <div class="author-stars">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="continue-btn testimonials-cta" data-next="loading">
+                    <p>Continuar con mi diagnóstico personalizado</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- REDUNDANT SECTIONS REMOVED -->
+
+
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- PREMIUM FOOTER -->
+    <footer class="quiz-global-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy" class="footer-link">Privacidad</a>
+                <span class="footer-sep">•</span>
+                <a href="#terms" class="footer-link">Términos de uso</a>
+            </div>
+            <p class="footer-copyright">© 2026 Menopausia con Claridad. Todos los derechos reservados.</p>
+            <p class="footer-disclaimer">Este sitio no forma parte del sitio web de Facebook o Facebook Inc. Además,
+                este sitio NO está respaldado por Facebook de ninguna manera. FACEBOOK es una marca registrada de
+                FACEBOOK, Inc.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

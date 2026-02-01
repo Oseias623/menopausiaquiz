@@ -2,17 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===================================
     // ANALYTICS TRACKER
     // ===================================
-    // AnalyticsTracker object is defined in analytics-tracker.js
-    // It provides session management and event tracking
+    // AnalyticsTracker is loaded from analytics-tracker.js
 
-    // --- SESSION MANAGEMENT ---
-    let sessionId = localStorage.getItem('quiz_session_id');
-    if (!sessionId) {
-        sessionId = crypto.randomUUID();
-        localStorage.setItem('quiz_session_id', sessionId);
-    }
-
-    // --- TRACKING FUNCTION ---
 
 
     // --- DATA & CONTENT ---
