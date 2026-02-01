@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Preview - Menopausia con Claridad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #F2F7F4 0%, #FEFCF7 100%);
+            min-height: 100vh;
+            padding: 3rem;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #2D5A47;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #5A635E;
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid #C9A55C;
+            padding-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #7A837E;
+            margin-bottom: 3rem;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .logo-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(45, 90, 71, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .logo-card.dark {
+            background: #1E3D30;
+        }
+
+        .logo-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .logo-card.symbol img {
+            height: 80px;
+            width: auto;
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .color-swatch {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .color-preview {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .color-preview.light-text {
+            color: #1A1F1C;
+            text-shadow: none;
+        }
+
+        .color-info {
+            background: white;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .color-name {
+            font-weight: 600;
+            color: #2D3430;
+            font-size: 0.875rem;
+        }
+
+        .color-hex {
+            color: #7A837E;
+            font-size: 0.75rem;
+            font-family: monospace;
+        }
+
+        /* Typography */
+        .typography-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(45, 90, 71, 0.08);
+        }
+
+        .font-display-demo {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .font-display-demo h3 {
+            font-size: 3rem;
+            color: #2D5A47;
+            margin-bottom: 0.5rem;
+        }
+
+        .font-display-demo p {
+            font-size: 1.5rem;
+            color: #5A635E;
+            font-style: italic;
+        }
+
+        .font-body-demo {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #E2E6E4;
+        }
+
+        .font-body-demo p {
+            font-size: 1rem;
+            color: #3D4642;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* Buttons */
+        .buttons-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2D5A47 0%, #1E3D30 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(45, 90, 71, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(45, 90, 71, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #2D5A47;
+            border: 2px solid #2D5A47;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #2D5A47;
+            color: white;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #C9A55C 0%, #D4B876 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(201, 165, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201, 165, 92, 0.4);
+        }
+
+        /* Card Demo */
+        .card-demo {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(45, 90, 71, 0.1);
+            border: 1px solid #E2E6E4;
+        }
+
+        .card-demo h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #2D5A47;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-demo p {
+            color: #5A635E;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-demo .tag {
+            display: inline-block;
+            background: #E8F0EC;
+            color: #2D5A47;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .label {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #7A837E;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Menopausia con Claridad</h1>
+    <p class="subtitle">Brand Identity Preview - Verde & Dourado</p>
+
+    <h2>Logo Variations</h2>
+    <div class="logo-section">
+        <div>
+            <div class="logo-card">
+                <img src="logo.svg" alt="Logo Principal">
+            </div>
+            <span class="label">Logo Principal (Fundo Claro)</span>
+        </div>
+        <div>
+            <div class="logo-card dark">
+                <img src="logo-white.svg" alt="Logo Branco">
+            </div>
+            <span class="label">Logo Branco (Fundo Escuro)</span>
+        </div>
+        <div>
+            <div class="logo-card symbol">
+                <img src="logo-symbol.svg" alt="Símbolo">
+            </div>
+            <span class="label">Símbolo / Favicon</span>
+        </div>
+    </div>
+
+    <h2>Paleta de Cores - Verde</h2>
+    <div class="color-grid">
+        <div class="color-swatch">
+            <div class="color-preview" style="background: #2D5A47;">Primary</div>
+            <div class="color-info">
+                <div class="color-name">Verde Principal</div>
+                <div class="color-hex">#2D5A47</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview" style="background: #3D7A5F;">Light</div>
+            <div class="color-info">
+                <div class="color-name">Verde Claro</div>
+                <div class="color-hex">#3D7A5F</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview" style="background: #1E3D30;">Dark</div>
+            <div class="color-info">
+                <div class="color-name">Verde Escuro</div>
+                <div class="color-hex">#1E3D30</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview light-text" style="background: #E8F0EC;">Soft</div>
+            <div class="color-info">
+                <div class="color-name">Verde Suave</div>
+                <div class="color-hex">#E8F0EC</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview light-text" style="background: #F2F7F4;">Softer</div>
+            <div class="color-info">
+                <div class="color-name">Verde Pálido</div>
+                <div class="color-hex">#F2F7F4</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Paleta de Cores - Dourado</h2>
+    <div class="color-grid">
+        <div class="color-swatch">
+            <div class="color-preview" style="background: #C9A55C;">Primary</div>
+            <div class="color-info">
+                <div class="color-name">Dourado Principal</div>
+                <div class="color-hex">#C9A55C</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview" style="background: #D4B876;">Light</div>
+            <div class="color-info">
+                <div class="color-name">Dourado Claro</div>
+                <div class="color-hex">#D4B876</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview" style="background: #A8864A;">Dark</div>
+            <div class="color-info">
+                <div class="color-name">Dourado Escuro</div>
+                <div class="color-hex">#A8864A</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview light-text" style="background: #DECCA8;">Muted</div>
+            <div class="color-info">
+                <div class="color-name">Dourado Suave</div>
+                <div class="color-hex">#DECCA8</div>
+            </div>
+        </div>
+        <div class="color-swatch">
+            <div class="color-preview light-text" style="background: #FDF8EE;">Soft</div>
+            <div class="color-info">
+                <div class="color-name">Creme Dourado</div>
+                <div class="color-hex">#FDF8EE</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Tipografia</h2>
+    <div class="typography-section">
+        <div class="font-display-demo">
+            <h3>Cormorant Garamond</h3>
+            <p>con Claridad</p>
+        </div>
+        <div class="font-body-demo">
+            <p><strong>Outfit (Body)</strong> - Tu cuerpo no está roto. Solo cambió las reglas. Descubre qué está pasando y cómo miles de mujeres están recuperando su energía y bienestar después de los 40.</p>
+        </div>
+    </div>
+
+    <h2>Botões</h2>
+    <div class="buttons-section">
+        <button class="btn-primary">Comenzar Diagnóstico</button>
+        <button class="btn-secondary">Saber Más</button>
+        <button class="btn-gold">Ver Mi Plan</button>
+    </div>
+
+    <h2>Card Example</h2>
+    <div class="card-demo">
+        <span class="tag">Bloqueo Circadiano</span>
+        <h4>Tu reloj biológico necesita ajuste</h4>
+        <p>Tu cuerpo presenta señales de desincronización del ritmo circadiano, lo que afecta tu metabolismo nocturno y la calidad de tu descanso.</p>
+        <button class="btn-primary" style="width: 100%;">Continuar</button>
+    </div>
+</body>
+</html>
