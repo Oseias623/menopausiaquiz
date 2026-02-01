@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- SUPABASE CONFIG ---
-    const supabaseUrl = 'https://pmscpydblddkwbgkzdmw.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtc2NweWRibGRka3diZ2t6ZG13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxMTg1MTEsImV4cCI6MjA4MjY5NDUxMX0.O197knt-1fDoi-5zSHVdGbz0StIJrfaTRKba5hezWX0';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    // ===================================
+    // ANALYTICS TRACKER
+    // ===================================
+    // AnalyticsTracker object is defined in analytics-tracker.js
+    // It provides session management and event tracking
 
     // --- SESSION MANAGEMENT ---
     let sessionId = localStorage.getItem('quiz_session_id');
@@ -12,22 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- TRACKING FUNCTION ---
-    async function trackEvent(eventType, stepId, data = {}) {
-        try {
-            const { error } = await supabase
-                .from('quiz_events')
-                .insert({
-                    session_id: sessionId,
-                    event_type: eventType,
-                    step_id: stepId,
-                    data: data
-                });
 
-            if (error) console.error('Error tracking event:', error);
-        } catch (err) {
-            console.error('Tracking exception:', err);
-        }
-    }
 
     // --- DATA & CONTENT ---
     const ageFeedback = {
@@ -123,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', handleOptionClick);
         });
 
+        // === ANALYTICS ===
+        AnalyticsTracker.setupConsentBanner();
+        AnalyticsTracker.initSession();
+
         // Continue Buttons
         document.querySelectorAll('.continue-btn').forEach(btn => {
             btn.addEventListener('click', handleContinueClick);
@@ -203,8 +193,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Default to 4semanas
                 if (!selectedPlan) selectedPlan = '4semanas';
 
+                // TRACK CHECKOUT CLICK
+                AnalyticsTracker.trackCheckout(selectedPlan, 'offer_section');
+
                 const url = checkoutUrls[selectedPlan] || '#checkout-4semanas';
-                window.location.href = url;
+                // Small delay not strictly needed if trackCheckout is async non-blocking, but guide suggests specific pattern?
+                // Guide says: await AnalyticsTracker.trackCheckout... and wait 100ms.
+
+                // Since function is not async in listener currently, I need to make the listener async?
+                // The guide shows: btn.addEventListener('click', async function () { ...
+                // But here I'm modifying existing code. I'll make it async if possible or just fire and forget. 
+                // Guide snippet at 223 uses setTimeout.
+
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 100);
             });
         });
 
@@ -217,6 +220,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleBackClick() {
         if (quizState.history.length === 0) return;
         const prevStepId = quizState.history.pop();
+
+        // TRACK BACK NAVIGATION
+        AnalyticsTracker.trackEvent('back_button_clicked', {
+            step_id: quizState.currentStepId,
+            navigation_direction: 'back',
+            metadata: {
+                from_step: quizState.currentStepId,
+                to_step: prevStepId
+            }
+        });
+
         navigateTo(prevStepId, false); // false = don't save to history (we are popping)
     }
 
@@ -233,17 +247,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Track Lead
-            try {
-                await supabase.from('quiz_leads').insert({
-                    email: email,
-                    quiz_data: quizState.answers,
-                    source: 'quiz_flow'
-                });
+            // Track Lead
+            await AnalyticsTracker.trackEmailCapture(email);
 
-                trackEvent('lead_captured', 'email_step', { email: email }); // Consider privacy if tracking emails in events
-            } catch (err) {
-                console.error('Error saving lead:', err);
-            }
+            // Proceed to next step
+            // (Wait slightly/handled by handleContinueClick logic that follows, 
+            // but we might want to ensure trackEmailCapture finishes first? It is awaited.)
+
+            /* Old Supabase lead capture removed */
 
             handleContinueClick(e);
         });
@@ -264,9 +275,13 @@ document.addEventListener('DOMContentLoaded', () => {
             quizState.answers[stepId] = value;
 
             // Track Answer
-            trackEvent('answer_selected', stepId, {
-                answer: value,
-                category: block || 'no_category',
+            // Track Answer
+            AnalyticsTracker.trackEvent('answer_selected', {
+                step_id: stepId,
+                step_number: parseInt(parentStep.dataset.step) || 0,
+                answer_value: value,
+                answer_text: btn.textContent.trim(),
+                block_type: block || null
             });
         }
 
@@ -317,6 +332,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = e.currentTarget;
         const nextId = btn.dataset.next;
         const parentStep = btn.closest('.quiz-step');
+
+        // TRACK MULTI-SELECT ANSWERS (para steps com checkboxes)
+        if (parentStep.id === 'step7' || parentStep.id === 'step9' || parentStep.id === 'step_physical') {
+            const checked = parentStep.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedValues = Array.from(checked).map(input => ({
+                value: input.value,
+                text: input.closest('label')?.textContent?.trim() || input.value,
+                block: input.dataset.block || input.dataset.problem || null
+            }));
+
+            AnalyticsTracker.trackEvent('multi_answer_selected', {
+                step_id: parentStep.id,
+                step_number: parseInt(parentStep.dataset.step) || 0,
+                multi_answers: selectedValues
+            });
+        }
 
         // If coming from Step 7 (Symptoms), calculate scores from checkboxes
         if (parentStep.id === 'step7') {
@@ -370,13 +401,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SUPPORT FUNCTIONS ---
 
     function navigateTo(stepId, saveHistory = true) {
-        // Track View
-        trackEvent('step_view', stepId, {
-            previous_step: quizState.currentStepId
-        });
-
         // Find Current Step
         const current = document.querySelector('.quiz-step.active');
+        const stepNum = current ? parseInt(current.dataset.step) : 0; // Use current step number or next? 
+        // Logic says we track the step we are GOING TO or the one we just Viewed? 
+        // Guide says: LOGO APÓS next.classList.add('active'); ... AnalyticsTracker.trackEvent('step_view', { step_id: stepId...
+
+        // So I will insert it LATER in the function as per guide.
+        // But I need to remove the OLD trackEvent call here first.
+
 
         // Save to history if moving forward (and logic allows)
         if (current && saveHistory) {
@@ -391,6 +424,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (next) {
             next.classList.add('active');
             quizState.currentStepId = stepId;
+
+            // TRACK STEP VIEW AND RESET TIMER
+            AnalyticsTracker.trackEvent('step_view', {
+                step_id: stepId,
+                step_number: parseInt(next.dataset.step) || 0
+            });
+            AnalyticsTracker.resetStepTimer();
 
             // Save progress to localStorage (except special screens)
             const noSaveScreens = ['loading', 'diagnosis', 'offer_screen', 'checkout'];
@@ -760,6 +800,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const marker = document.querySelector('.diag-bar-marker');
             if (marker) marker.style.left = winner === 'misto' ? '75%' : '85%';
         }, 800);
+
+        // TRACK QUIZ COMPLETION (Replacing logic from previous chunk comment - doing it here is better)
+        AnalyticsTracker.trackEvent('quiz_completed', {
+            step_id: 'diagnosis',
+            metadata: {
+                score_circadiano: scores.circadiano,
+                score_inflamacion: scores.inflamacion,
+                score_estructura: scores.estructura,
+                dominant_profile: winner
+            }
+        });
+
+        // UPDATE SESSION WITH FINAL SCORES
+        AnalyticsTracker.updateSessionStatus('completed', {
+            completed_at: new Date().toISOString(),
+            score_circadiano: scores.circadiano,
+            score_inflamacion: scores.inflamacion,
+            score_estructura: scores.estructura,
+            dominant_profile: winner,
+            time_spent_seconds: Math.floor((Date.now() - AnalyticsTracker.sessionStartTime) / 1000)
+        });
     }
 
     function animateComfortLoader() {

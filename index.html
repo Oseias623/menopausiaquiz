@@ -11,6 +11,9 @@
     <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Analytics Tracker -->
+    <script src="analytics-tracker.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -50,6 +53,13 @@
 
         <!-- ETAPA 0: INTRO / GANCHO -->
         <div class="quiz-step active" id="intro" data-step="0">
+            <!-- CONSENT BANNER -->
+            <div id="consent-banner" class="consent-banner">
+                <p>🍪 Usamos cookies para melhorar sua experiência. Ao continuar, você concorda com nossa coleta de
+                    dados anônimos para melhorar o quiz.</p>
+                <button id="accept-consent">Aceitar e continuar</button>
+            </div>
+
             <div class="intro-content">
                 <h1 class="intro-title">¿Por qué después de los 40 parece que tu cuerpo ya no te pertenece?</h1>
                 <p class="intro-subtitle">Descubre el desajuste invisible que está bloqueando tu energía y metabolismo
