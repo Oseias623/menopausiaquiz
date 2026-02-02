@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Offer CTA Buttons - Hotmart Checkout
         const checkoutUrls = {
-            '7dias': 'https://buy.stripe.com/test_6oUaEXcTagoW5Agf6j6g801',
+            '7dias': 'https://buy.stripe.com/dRm14ng693Pb3JQ7u93gk07',
             '4semanas': 'https://buy.stripe.com/test_28EeVddXe1u26Ek9LZ6g802',
             '12semanas': 'https://buy.stripe.com/test_5kQdR98CU0pY1k08HV6g803'
         };
@@ -907,7 +907,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 const checked = document.querySelector('.plan-radio:checked');
                 const plan = checked ? checked.value : '4semanas';
-                const urls = { '7dias': 'https://buy.stripe.com/test_6oUaEXcTagoW5Agf6j6g801', '4semanas': 'https://buy.stripe.com/test_28EeVddXe1u26Ek9LZ6g802', '12semanas': 'https://buy.stripe.com/test_5kQdR98CU0pY1k08HV6g803' };
+                const urls = { '7dias': 'https://buy.stripe.com/dRm14ng693Pb3JQ7u93gk07', '4semanas': 'https://buy.stripe.com/test_28EeVddXe1u26Ek9LZ6g802', '12semanas': 'https://buy.stripe.com/test_5kQdR98CU0pY1k08HV6g803' };
                 window.location.href = urls[plan] || '#checkout-4semanas';
             }
         });
