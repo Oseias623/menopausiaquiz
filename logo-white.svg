@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Apenas texto branco -->
+  <text x="10" y="38"
+        font-family="Cormorant Garamond, Georgia, serif"
+        font-size="30"
+        font-weight="600"
+        fill="#FFFFFF"
+        letter-spacing="3">MENOPAUSIA</text>
+
+  <text x="10" y="68"
+        font-family="Cormorant Garamond, Georgia, serif"
+        font-size="28"
+        font-weight="500"
+        font-style="italic"
+        fill="#C9A55C"
+        letter-spacing="1">con Claridad</text>
+</svg>
